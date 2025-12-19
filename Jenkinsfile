@@ -4,7 +4,7 @@ pipeline {
     environment {
         // 設定環境變數
         DOCKER_CREDS = 'docker-hub-credentials' // 剛剛在 Jenkins 設定的 ID
-        DOCKER_USER = 'LCK0527'
+        DOCKER_USER = 'lck0527'
         IMAGE_NAME = "${DOCKER_USER}/cicd"
         DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1451494053555474444/6WJZ2ZX1psK6J7bRYI7rcXqFV295hjNi7UVmyRrOmvrktrAQotCIJbeOVS-fBzGY41nN'
         
