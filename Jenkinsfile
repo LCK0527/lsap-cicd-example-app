@@ -29,12 +29,18 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying to Staging Environment...'
-                    def devTag = "dev-${env.BUILD_NUMBER}" 
+                    // Read version from package.json
+                    def version = sh(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
+                    def devTag = "dev-${env.BUILD_NUMBER}"
+                    def versionTag = "v${version}"
                     
                     // 1. Build & Push
                     docker.withRegistry('', DOCKER_CREDS) {
                         def appImage = docker.build("${IMAGE_NAME}:${devTag}")
                         appImage.push()
+                        // Also tag with semantic version
+                        sh "docker tag ${IMAGE_NAME}:${devTag} ${IMAGE_NAME}:${versionTag}"
+                        sh "docker push ${IMAGE_NAME}:${versionTag}"
                     }
                     
                     // 2. Cleanup old container (|| true 避免如果容器不存在導致失敗)
