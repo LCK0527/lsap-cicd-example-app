@@ -4,13 +4,13 @@ pipeline {
     environment {
         // 設定環境變數
         DOCKER_CREDS = 'docker-hub-credentials' // 剛剛在 Jenkins 設定的 ID
-        DOCKER_USER = 'lck0527'
+        DOCKER_USER = 'LCK0527'
         IMAGE_NAME = "${DOCKER_USER}/cicd"
-        DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1444647990399602780/cZsKcbwfXv3rENUDNLxtde5Zu9XZEACGU1RdGam9HB9qaDFn0HH-DLeWlOxEyRo1PEim'
+        DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1451494053555474444/6WJZ2ZX1psK6J7bRYI7rcXqFV295hjNi7UVmyRrOmvrktrAQotCIJbeOVS-fBzGY41nN'
         
         // 個人資訊 (用於通知)
         MY_NAME = "林仲鎧" 
-        MY_STUDENT_ID = "b12705052"
+        MY_STUDENT_ID = "B12705052"
     }
     stages {
         // Part 1: CI & Quality Gate
