@@ -107,6 +107,17 @@ pipeline {
                 sh "curl -H \"Content-Type: application/json\" -d '${payload}' ${DISCORD_WEBHOOK}"
             }
         }
+        success {
+            script {
+                def payload = """
+                {
+                    "content": "✅ **Build Succeeded!** ✅\\n**Name:** ${env.MY_NAME}\\n**ID:** ${env.MY_STUDENT_ID}\\n**Job:** ${env.JOB_NAME}\\n**Build:** ${env.BUILD_NUMBER}\\n**Repo:** ${env.GIT_URL}\\n**Branch:** ${env.BRANCH_NAME}\\n**Status:** ${currentBuild.currentResult}"
+                }
+                """
+                // 使用 curl 發送 Discord Webhook
+                sh "curl -H \"Content-Type: application/json\" -d '${payload}' ${DISCORD_WEBHOOK}"
+            }
+        }
     }
 }
 
