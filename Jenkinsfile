@@ -45,7 +45,10 @@ pipeline {
                     
                     // 4. Verify Health
                     sleep 5 // 等待容器啟動
-                    sh 'curl -f http://localhost:8081/health'
+                    sh '''
+                        CONTAINER_IP=$(docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" dev-app)
+                        curl -f http://${CONTAINER_IP}:8080/health
+                    '''
                 }
             }
         }
